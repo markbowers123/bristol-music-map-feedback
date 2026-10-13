@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Bristol’s live venues, studios, labels, promoters, festivals, music education, media and PR.">
+  <meta name="theme-color" content="#f5f4ee">
+  <title>Bristol Music Map</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/leaflet.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/leaflet.js" defer></script>
+  <script type="module" src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#explorer">Skip to the map and directory</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Bristol Music Map home">
+        <svg class="brand-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 10h5v17H5zM14 5h5v22h-5zM23 15h5v12h-5z"/></svg>
+        <span>Bristol<span class="brand-light"> Music Map</span></span>
+      </a>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div><p class="eyebrow">THE CITY. THE PEOPLE. THE MUSIC.</p><h1 id="page-title">Bristol’s music scene<span class="title-dot">.</span></h1><p class="intro-copy">Live venues, labels and distributors, studios, promoters and agents, festivals, education, media, managers and specialist support.<br> Explore the people and organisations behind Bristol’s music.</p></div>
+        <div class="intro-stats"><div><strong id="total-venues">…</strong><span>music listings</span></div><div class="stats-secondary"><strong id="total-types">8</strong><span>industry sectors</span></div></div>
+      </section>
+      <section id="explorer" class="explorer" aria-label="Explore the Bristol music map and directory">
+        <div class="explorer-toolbar">
+          <div class="view-switch" role="group" aria-label="Choose a view"><button id="map-view-button" aria-pressed="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m2 4 5-2 6 2 5-2v14l-5 2-6-2-5 2Zm5-2v14m6-12v14"/></svg>Map</button><button id="directory-view-button" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4h2m3 0h9M3 10h2m3 0h9M3 16h2m3 0h9"/></svg>Directory</button></div>
+          <p class="result-summary" id="result-summary" aria-live="polite">Loading listings…</p>
+        </div>
+        <div class="explorer-body" id="explorer-body">
+          <aside class="browse-panel" aria-label="Search and filter music listings">
+            <div class="filters">
+              <label class="search-label" for="search">Search Bristol’s music scene</label>
+              <div class="search-box"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input aria-label="Search Bristol’s music scene" id="search" type="search" placeholder="Name, place or postcode" autocomplete="off"><button id="clear-search" aria-label="Clear search" hidden>×</button></div>
+              <label class="select-label" for="venue-type">Industry sector</label><select aria-label="Industry sector" id="venue-type"><option value="">All sectors</option></select>
+              <div id="postcode-filter"><label class="select-label" for="postcode-area">Postcode area</label><select aria-label="Postcode area" id="postcode-area"><option value="">All areas</option><option value="unpublished">No public postcode</option></select></div>
+              <button id="more-filters" hidden class="more-filters" aria-expanded="false" aria-controls="extra-filters">More filters <span id="extra-filter-count"></span></button>
+              <div id="extra-filters" hidden class="extra-filters">
+                <div id="capacity-filter" hidden><label class="select-label" for="capacity-band">Audience capacity</label><select aria-label="Audience capacity" id="capacity-band"><option value="">Any capacity</option><option value="under-200">Under 200</option><option value="200-499">200–499</option><option value="500-999">500–999</option><option value="1000-plus">1,000 or more</option><option value="unknown">Capacity not recorded</option></select>
+                <p class="filter-help" id="capacity-help">Matches a published room layout, including hire layouts. Capacities are not added together.</p></div>
+              </div>
+              <div id="festival-filters" class="label-filters" hidden><label class="select-label" for="festival-format">Festival format</label><select aria-label="Festival format" id="festival-format"><option value="">All formats</option><option>Multi-venue</option><option>Outdoor festival</option><option>Concert series</option><option>Community festival</option><option>Indoor festival</option></select><label class="select-label" for="festival-status">Latest edition</label><select aria-label="Latest edition" id="festival-status"><option value="">All date statuses</option><option value="Dates announced">Dates announced</option><option value="Return announced">Return announced, dates to follow</option><option value="Return expected">Return expected, dates unconfirmed</option></select></div>
+              <div id="promoter-filters" class="label-filters" hidden><label class="select-label" for="promoter-venue">Venue in show examples</label><select aria-label="Venue in show examples" id="promoter-venue"><option value="">All linked venues</option></select></div>
+              <div class="activity-filter" role="group" aria-label="Music activity"><button data-activity="" aria-pressed="true">All services</button><button data-activity="Recording" aria-pressed="false">Recording</button><button data-activity="Rehearsal" aria-pressed="false">Rehearsal</button></div>
+              <div class="filter-caption"><span id="filter-count">Loading listings…</span><button id="reset-filters" class="text-button" hidden>Reset filters</button></div>
+            </div>
+            <div id="venue-list" class="venue-list"><p class="loading-copy">Loading music listings…</p></div>
+          </aside>
+          <div class="map-pane" id="map-pane">
+            <div id="map" aria-label="Map of Bristol music listings"></div>
+            <div class="map-chip"><span class="live-dot"></span> BRISTOL <span id="map-count">47 map dots</span></div>
+            <button id="fit-map" class="fit-map" aria-label="Show all matching listings" title="Show all matching listings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M9 12h6m-3-3v6"/></svg></button>
+            <button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="map-legend">Map key</button>
+            <div class="map-legend" id="map-legend"><p>Browse by industry sector</p><div id="legend-types"></div><div class="precision-legend">Dot colours show industry sectors. Some locations use approximate postcode centres. Select a dot for details.</div></div>
+            <p class="map-error" id="map-error" hidden>Map tiles could not load. Listings remain available in the directory.</p>
+          </div>
+          <div id="directory" class="directory" aria-label="Music listings directory" hidden></div>
+        </div>
+      </section>
+      <footer><span>Bristol Music Map</span><span id="footer-data-note">Bristol’s music industry</span><div class="footer-actions"><span class="text-button">Function coming soon</span></div></footer>
+    </main>
+  </div>
+  <button id="detail-scrim" class="detail-scrim" aria-label="Close listing details" hidden></button>
+  <aside id="venue-detail" class="venue-detail" role="dialog" aria-label="Listing details" aria-modal="false" tabindex="-1" hidden></aside>
+
+</body>
+</html>
