@@ -25,15 +25,8 @@ export function normalise(value) {
 }
 export function postcodeArea(postcode) { return String(postcode||'').toUpperCase().replace(/\s/g,'').slice(0,-3); }
 export function providerPostcodes(v) { return [...new Set([v.postcode,...(v.education_details?.locations||[]).map(l=>l.postcode),...(v.festival_details?.map_sites||[]).map(s=>s.postcode)].filter(Boolean))]; }
-export const capacityBands = {'under-200':[1,199], '200-499':[200,499], '500-999':[500,999], '1000-plus':[1000,Infinity]};
 export function studioFilter(state) { return state.type==='Studios & rehearsal spaces'||['Recording','Rehearsal'].includes(state.activity); }
-export function matchingCapacities(data,id,band) {
-  const rows=capacityRows(data,id).filter(c=>Number.isInteger(c.capacity)&&c.capacity>0);
-  if(!band)return rows;
-  const limits=capacityBands[band];
-  return limits?rows.filter(c=>c.capacity>=limits[0]&&c.capacity<=limits[1]):[];
-}
-export function filterVenues(venues, {query='',type='',activity='',area='',capacity='',promoterVenue='',festivalFormat='',festivalStatus=''}={}, data={capacities:[]}) {
+export function filterVenues(venues, {query='',type='',activity='',area='',promoterVenue='',festivalFormat='',festivalStatus=''}={}, data={capacities:[]}) {
   const clean=normalise(query).trim();
   const terms=clean.split(/\s+/).filter(Boolean);
   const compact=clean.replace(/\s/g,'');
@@ -45,10 +38,8 @@ export function filterVenues(venues, {query='',type='',activity='',area='',capac
     const codes=providerPostcodes(v);
     const search=terms.every(t=>haystack.includes(t))||(compact&&codes.some(code=>normalise(code).replace(/\s/g,'').includes(compact)));
     const areaMatch=!area||(area==='unpublished'?codes.length===0:codes.some(code=>postcodeArea(code)===area));
-    const performance=v.activities.some(a=>['Live music','Club nights'].includes(a));
-    const capacityMatch=!capacity||(performance&&(capacity==='unknown'?matchingCapacities(data,v.venue_id,'').length===0:matchingCapacities(data,v.venue_id,capacity).length>0));
     const typeMatch=inSector(v,sectorParam(type));
-    return (!festivalFormat||v.festival_details?.format===festivalFormat)&&(!festivalStatus||v.festival_details?.return_status===festivalStatus)&&(!promoterVenue||v.promoter_details?.events.some(e=>e.venue_id===promoterVenue)) && typeMatch && (!activity||v.activities.includes(activity)) && areaMatch && capacityMatch && search;
+    return (!festivalFormat||v.festival_details?.format===festivalFormat)&&(!festivalStatus||v.festival_details?.return_status===festivalStatus)&&(!promoterVenue||v.promoter_details?.events.some(e=>e.venue_id===promoterVenue)) && typeMatch && (!activity||v.activities.includes(activity)) && areaMatch && search;
   }).sort((a,b)=>{
     if(!clean)return 0;
     const rank=v=>normalise(v.name)===clean?0:normalise(v.name).includes(clean)?1:2;
