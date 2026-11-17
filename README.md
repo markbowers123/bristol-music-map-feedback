@@ -1,4 +1,4 @@
-# Bristol Music Map feedback copy
+# West of England Music Map feedback copy
 
 Password-protected feedback copy of the current GPT map, updated 17 November 2026 from GPT site version 68 (source 3080b16c12aa59c0d42fbfa278823b09b8dbf55f).
 
