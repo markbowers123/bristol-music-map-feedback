@@ -1,9 +1,9 @@
-# Bristol Music Map
+# Bristol Music Map feedback copy
 
-Mapping the West of England’s Music Industry. By Mark Bowers.
+Password-protected feedback copy of the current GPT map, updated 17 November 2026 from GPT site version 68 (source 3080b16c12aa59c0d42fbfa278823b09b8dbf55f).
 
-The published root contains a shared-password landing page and an AES-256-GCM encrypted map snapshot. PBKDF2-SHA-256 derives the decryption key with a random salt and 600,000 iterations. The password and key are not stored in this repository or browser storage. Sign out or reload to return to the landing page.
+340 listing profiles across eight sectors. 319 profiles carry 468 sourced activity tags across 26 activities. The remaining 21 were reviewed but lack sufficient current evidence for tags. Missing tags do not prove a service gap. Includes regional and activity filters, card sources and checked dates, and a browser-local shortlist.
 
-This feedback snapshot retains its existing 187 listings. It is separate from the newer ChatGPT Site. GitHub Pages should publish from main, / (root).
+The master database remains local. Do not publish the plaintext public/ directory. GitHub Pages must publish only password-public/. The existing password is retained. Suggestions remain coming soon.
 
-Earlier public map files remain in the Git history. The password protects the current published map, not previously public copies.
+GPT working site: https://bristol-music-map.markbowers1125.chatgpt.site/
