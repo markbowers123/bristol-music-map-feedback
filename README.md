@@ -1,6 +1,6 @@
 # West of England Music Map feedback copy
 
-Update 3.0, published from GPT Site version 95 (source `6f70101b6769e084d298fc8acd27092fe394e0af`), 18 November 2026.
+Update 3.0, published from GPT Site version 96 (source `d765af1d7655d7c39710a5f740afbc432a40e2d9`), 19 November 2026.
 
 The password-protected release contains 401 listing profiles across eight sectors, with 41 activity tags and 675 tag assignments. The Research section includes the Evidence Workbench. Suggestions remain coming soon.
 
